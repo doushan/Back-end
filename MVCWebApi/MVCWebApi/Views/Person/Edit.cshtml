@@ -1,0 +1,76 @@
+﻿@model MVCWebApi.Models.Person
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Person</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DOB)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DOB)
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+
+        <p>
+            <input type="button" id="EditApi" value="Update(Json,Api)" />
+            <input type="submit" value="Update(ActionResult,Api)" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#EditApi").click(function () {
+           // debugger;
+            var id = $("#ID").val();
+            var name = $("#Name").val();
+            var address = $("#Address").val();
+            var dob = $("#DOB").val();
+            $.ajax({
+                url: "http://localhost:49493/api/Values",
+                type: "Put",
+                data: JSON.stringify([name, address, dob, id]),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert('Updated Successfully');
+                    window.location.href = "../Index";
+                },
+                error: function (msg) { alert(msg); }
+            });
+        });
+    });
+</script>
