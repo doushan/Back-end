@@ -76,16 +76,19 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="ProductMaintenance.html" />
+    <Content Include="StaffMaintenance.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ApplicantController.cs" />
+    <Compile Include="Controllers\InterviewController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Applicant.cs" />
+    <Compile Include="Models\Interview.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Vacancy.cs" />

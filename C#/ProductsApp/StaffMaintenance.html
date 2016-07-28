@@ -1,0 +1,125 @@
+﻿
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../dist/main.css"/>
+    <style>
+        .filter-container {
+            background-color: #FFFFFF;
+            padding: 0px 0px 20px 20px;
+            border: 1px solid black;
+        }
+
+        .staff-list-container {
+            height: 600px;
+            min-width: 500px;
+            background-color: #FFFFFF;
+            border: 1px solid black;
+        }
+
+        .search-input {
+            margin-top: 30px;
+            margin-left: 10px;
+        }
+
+        .search-button {
+            margin-top: 5px;
+            margin-left: 65px;
+        }
+
+        .filter-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-left: 10px;
+        }
+
+        .first-list {
+            background-color: grey;
+            padding: 0px 0px 20px 20px;
+        }
+
+        .staff-list-image {
+            width: 100px;
+            margin-top: 18px;
+            margin-left: 20px;
+        }
+
+        .staff-name {
+            font-size: 20px;
+        }
+
+        .staff-job-title {
+            font-size: 20px;
+        }
+         
+    </style>
+</head>
+<body>
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="filter-container container-fluid">
+                <input type="text" id="search-input" placeholder="Search" class="search-input"/>
+                <input type="button" value="Search" class="search-button" onclick="find();" />
+                <h1></h1>
+                <h2></h2>
+                <h3 class="filter-text">Filter</h3>
+                <select class="job-title">
+                    <option>Software Developer</option>
+                    <option>Front End Developer</option>
+                    <option>QA</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="staff-list-container">
+                <div class="first-list container-fluid">
+                    <span id="image" class="image"><img id="staff-list-image" src="https://feminismtechculture.files.wordpress.com/2014/11/facebook-no-profile-picture-icon-620x389.jpg" alt="No Profile Picture" class="staff-list-image" /></span><span id="staff-name" class="staff-name">
+                            <h3 class="name" id="name">John Smith</h3>
+                        </span><span id="staff-job-title" class="staff-job-title">
+                            <h3 class="job-title" id="job-title">Senior Software Developer</h3>
+                        </span>
+                    <button type="edit" class="edit">Edit</button>
+                    <button type="delete" class="delete">Delete</button>
+                    <button type="approve" class="approve-ban">Approve/Ban</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/staff';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#staff'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.FirstName + ': $' + item.JobTitle;
+        }
+
+        function find() {
+            var id = $('#search-input').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#name').text(data.FirstName + " " + data.LastName);
+                    $('#job-title').text(data.JobTitle);
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#name').text('Error: ' + err);
+                });
+        }
+    </script>
+</body>
+</html>
