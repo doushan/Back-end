@@ -80,12 +80,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\InterviewController.cs" />
+=======
+    <Compile Include="Controllers\ApplicantController.cs" />
+>>>>>>> origin/master
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\Interview.cs" />
+=======
+    <Compile Include="Models\Applicant.cs" />
+>>>>>>> origin/master
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Vacancy.cs" />
